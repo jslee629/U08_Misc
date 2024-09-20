@@ -15,7 +15,10 @@ public:
 	ACSlicableMesh();
 
 protected:
-	virtual void OnConstruction(FTransform& Transform) override;
+	virtual void OnConstruction(const FTransform& Transform) override;
+
+public:
+	FORCEINLINE UMaterial* GetCapMaterial() { return CapMaterial; }
 
 protected:
 	UPROPERTY(VisibleDefaultsOnly, Category = "Components")
@@ -26,4 +29,7 @@ protected:
 
 	UPROPERTY(VisibleDefaultsOnly, Category = "Components")
 	UProceduralMeshComponent* ProcMeshComp;
+
+	UPROPERTY(EditAnywhere, Category = "Slice")
+	UMaterial* CapMaterial;
 };
