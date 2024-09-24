@@ -1,0 +1,37 @@
+#include "CMiku.h"
+#include "Materials/MaterialInstanceConstant.h"
+
+ACMiku::ACMiku()
+{
+	PrimaryActorTick.bCanEverTick = true;
+
+	ConstructorHelpers::FObjectFinder<USkeletalMesh> MeshAsset(TEXT("/Game/AMiku/Mesh/Appearance_Miku"));
+	if (MeshAsset.Succeeded())
+	{
+		GetMesh()->SetSkeletalMesh(MeshAsset.Object);
+	}
+
+	GetMesh()->SetRelativeLocation(FVector(0.f, 0.f, -88.f));
+	GetMesh()->SetRelativeRotation(FRotator(0.f, -90.f, -0.f));
+}
+
+void ACMiku::OnConstruction(const FTransform& Transform)
+{
+	Super::OnConstruction(Transform);
+
+	for (int32 i = 0; i < (int32)EMaterialElementType::Max; i++)
+	{
+		if (Materials[i])
+		{
+			GetMesh()->SetMaterial(i, Materials[i]);
+		}
+	}
+}
+
+void ACMiku::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+}
+
+
