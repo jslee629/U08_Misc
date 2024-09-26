@@ -5,10 +5,10 @@
 #include "TP_TopDownCharacter.h"
 #include "Engine/World.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "TP_TopDownCharacter.h"
 #include "Components/DecalComponent.h"
 #include "KismetProceduralMeshLibrary.h"
 #include "ProceduralMeshComponent.h"
+#include "TP_TopDownCharacter.h"
 #include "RHI/CSlicableMesh.h"
 
 ATP_TopDownPlayerController::ATP_TopDownPlayerController()
@@ -41,11 +41,12 @@ void ATP_TopDownPlayerController::MoveToMouseCursor()
 {
 	FHitResult Hit;
 	GetHitResultUnderCursor(ECC_Visibility, false, Hit);
-
+	
 	if (Hit.bBlockingHit)
 	{
 		SetNewMoveDestination(Hit.ImpactPoint);
 	}
+	
 }
 
 void ATP_TopDownPlayerController::SetNewMoveDestination(const FVector DestLocation)
@@ -75,8 +76,8 @@ void ATP_TopDownPlayerController::OnSetDestinationReleased()
 void ATP_TopDownPlayerController::OnSlice()
 {
 	FVector Start = GetPawn()->GetActorLocation();
-	FVector End = Start + GetPawn()->GetActorLocation() * 500.f;
-
+	FVector End = Start + GetPawn()->GetActorForwardVector() * 500.f;
+	
 	ATP_TopDownCharacter* ControlledPawn = GetPawn<ATP_TopDownCharacter>();
 	if (ControlledPawn)
 	{
@@ -88,7 +89,6 @@ void ATP_TopDownPlayerController::OnSlice()
 	Ignores.Add(GetPawn());
 
 	FHitResult Hit;
-
 	UKismetSystemLibrary::LineTraceSingle
 	(
 		GetWorld(),
@@ -110,11 +110,10 @@ void ATP_TopDownPlayerController::OnSlice()
 		return;
 	}
 
-	//Slice
+	ACSlicableMesh* OtherActor = Cast<ACSlicableMesh>(Hit.GetActor());
 	UProceduralMeshComponent* OtherComp = Cast<UProceduralMeshComponent>(Hit.Component);
-	ACSlicableMesh* OtherActor = Cast<ACSlicableMesh>(Hit.Actor);
 
-	if (OtherComp && OtherActor)
+	if (OtherActor && OtherComp)
 	{
 		FVector Direction = End - Start;
 		Direction.Normalize();

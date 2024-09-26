@@ -14,8 +14,6 @@ public:
 
 	virtual void Tick(float DeltaSeconds) override;
 
-	FORCEINLINE class UCameraComponent* GetTopDownCameraComponent() const { return TopDownCameraComponent; }
-	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	FORCEINLINE class UDecalComponent* GetCursorToWorld() { return CursorToWorld; }
 
 private:

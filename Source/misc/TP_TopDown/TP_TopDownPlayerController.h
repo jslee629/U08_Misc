@@ -19,7 +19,7 @@ protected:
 	virtual void SetupInputComponent() override;
 
 	void MoveToMouseCursor();
-
+	
 	void SetNewMoveDestination(const FVector DestLocation);
 
 	void OnSetDestinationPressed();

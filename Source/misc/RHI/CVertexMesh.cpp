@@ -11,18 +11,18 @@ ACVertexMesh::ACVertexMesh()
 	FVector V = FVector(0.5f);
 
 	//Front
-	Positions.Add(FVector(-V.X, -V.Y, -V.Z)); UVs.Add(FVector2D(0.f, 1.f));
-	Positions.Add(FVector(-V.X, -V.Y, +V.Z)); UVs.Add(FVector2D(0.f, 0.f));
-	Positions.Add(FVector(-V.X, +V.Y, -V.Z)); UVs.Add(FVector2D(1.f, 1.f));
-	Positions.Add(FVector(-V.X, +V.Y, +V.Z)); UVs.Add(FVector2D(1.f, 0.f));
+	Positions.Add(FVector(-V.X, -V.Y, -V.Z)); UVs.Add(FVector2D(0, 1));
+	Positions.Add(FVector(-V.X, -V.Y, +V.Z)); UVs.Add(FVector2D(0, 0));
+	Positions.Add(FVector(-V.X, +V.Y, -V.Z)); UVs.Add(FVector2D(1, 1));
+	Positions.Add(FVector(-V.X, +V.Y, +V.Z)); UVs.Add(FVector2D(1, 0));
 
 	for (int32 i = 0; i < 4; i++)
 	{
-		Normals.Add(FVector(-1.f, 0.f, 0.f));
-		Tangents.Add(FProcMeshTangent(0.f, 1.f, 0.f));
+		Normals.Add(FVector(-1, 0, 0));
+		Tangents.Add(FProcMeshTangent(0, 1, 0));
 		Colors.Add(FColor::Red);
 	}
-	AddIndicies(0);
+	AddIndices(0);
 
 	//Back
 	Positions.Add(FVector(+V.X, +V.Y, -V.Z)); UVs.Add(FVector2D(0, 1));
@@ -33,10 +33,10 @@ ACVertexMesh::ACVertexMesh()
 	for (int32 i = 0; i < 4; i++)
 	{
 		Normals.Add(FVector(+1, 0, 0));
-		Tangents.Add(FProcMeshTangent(0.f, -1.f, 0.f));
+		Tangents.Add(FProcMeshTangent(0, -1, 0));
 		Colors.Add(FColor::Green);
 	}
-	AddIndicies(4);
+	AddIndices(4);
 
 
 	//Top
@@ -47,11 +47,11 @@ ACVertexMesh::ACVertexMesh()
 
 	for (int32 i = 0; i < 4; i++)
 	{
-		Normals.Add(FVector(0.f, 0.f, +1.f));
-		Tangents.Add(FProcMeshTangent(0.f, 1.f, 0.f));
+		Normals.Add(FVector(0, 0, +1));
+		Tangents.Add(FProcMeshTangent(0, 1, 0));
 		Colors.Add(FColor::Blue);
 	}
-	AddIndicies(8);
+	AddIndices(8);
 
 
 	//Bottom
@@ -62,11 +62,11 @@ ACVertexMesh::ACVertexMesh()
 
 	for (int32 i = 0; i < 4; i++)
 	{
-		Normals.Add(FVector(0.f, 0.f, -1.f));
-		Tangents.Add(FProcMeshTangent(0.f, 1.f, 0.f));
+		Normals.Add(FVector(0, 0, -1));
+		Tangents.Add(FProcMeshTangent(0, 1, 0));
 		Colors.Add(FColor::Cyan);
 	}
-	AddIndicies(12);
+	AddIndices(12);
 
 
 	//Left
@@ -77,11 +77,11 @@ ACVertexMesh::ACVertexMesh()
 
 	for (int32 i = 0; i < 4; i++)
 	{
-		Normals.Add(FVector(0.f, -1.f, 0.f));
-		Tangents.Add(FProcMeshTangent(1.f, 0.f, 0.f));
+		Normals.Add(FVector(0, -1, 0));
+		Tangents.Add(FProcMeshTangent(1, 0, 0));
 		Colors.Add(FColor::Magenta);
 	}
-	AddIndicies(16);
+	AddIndices(16);
 
 
 	//Right
@@ -92,15 +92,14 @@ ACVertexMesh::ACVertexMesh()
 
 	for (int32 i = 0; i < 4; i++)
 	{
-		Normals.Add(FVector(0.f, +1.f, 0.f));
-		Tangents.Add(FProcMeshTangent(-1.f, 0.f, 0.f));
+		Normals.Add(FVector(0, +1, 0));
+		Tangents.Add(FProcMeshTangent(-1, 0, 0));
 		Colors.Add(FColor::Yellow);
 	}
-	AddIndicies(20);
+	AddIndices(20);
 
-	ProcMeshComp->CreateMeshSection(0, Positions, Indicies, Normals, UVs, Colors, Tangents, true);
+	ProcMeshComp->CreateMeshSection(0, Positions, Indices, Normals, UVs, Colors, Tangents, true);
 	ProcMeshComp->SetRelativeScale3D(FVector(100.f));
-
 }
 
 void ACVertexMesh::BeginPlay()
@@ -113,33 +112,33 @@ void ACVertexMesh::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	//CPU에서 위치 정보를 바꾸는건 미친짓
-	//for (int32 i = 0; i < Positions.Num(); i++)
-	//{
-	//	Positions[i] += FVector(10.f * DeltaTime, 0.f, 0.f);
-	//	GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::White, FString::SanitizeFloat(Positions[i].X));
-	//}
-
 	for (int32 i = 0; i < Colors.Num(); i += 4)
 	{
 		FColor RandomColor = FColor::MakeRandomColor();
 		RandomColor.A = 255.f;
 
-		Colors[i] = RandomColor;
-		Colors[i+1] = RandomColor;
-		Colors[i+2] = RandomColor;
-		Colors[i+3] = RandomColor;
+		Colors[i + 0] = RandomColor;
+		Colors[i + 1] = RandomColor;
+		Colors[i + 2] = RandomColor;
+		Colors[i + 3] = RandomColor;
 	}
+
+	/*for (int32 i = 0; i < Positions.Num(); i++)
+	{
+		Positions[i] += FVector(10 * DeltaTime, 0, 0);
+		GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::White, FString::SanitizeFloat(Positions[i].X));
+	}*/
 
 	ProcMeshComp->UpdateMeshSection(0, Positions, Normals, UVs, Colors, Tangents);
 }
 
-void ACVertexMesh::AddIndicies(int32 StartIndex)
+void ACVertexMesh::AddIndices(int32 StartIndex)
 {
-	Indicies.Add(2 + StartIndex);
-	Indicies.Add(1 + StartIndex);
-	Indicies.Add(0 + StartIndex);
-	Indicies.Add(3 + StartIndex);
-	Indicies.Add(1 + StartIndex);
-	Indicies.Add(2 + StartIndex);
+	Indices.Add(StartIndex + 2);
+	Indices.Add(StartIndex + 1);
+	Indices.Add(StartIndex + 0);
+
+	Indices.Add(StartIndex + 3);
+	Indices.Add(StartIndex + 1);
+	Indices.Add(StartIndex + 2);
 }

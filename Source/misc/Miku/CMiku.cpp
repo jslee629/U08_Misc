@@ -11,19 +11,28 @@ ACMiku::ACMiku()
 		GetMesh()->SetSkeletalMesh(MeshAsset.Object);
 	}
 
-	GetMesh()->SetRelativeLocation(FVector(0.f, 0.f, -88.f));
-	GetMesh()->SetRelativeRotation(FRotator(0.f, -90.f, -0.f));
+	GetMesh()->SetRelativeLocation(FVector(0, 0, -88));
+	GetMesh()->SetRelativeRotation(FRotator(0, -90, 0));
 }
 
 void ACMiku::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
 
-	for (int32 i = 0; i < (int32)EMaterialElementType::Max; i++)
+	if (MaterialData)
 	{
-		if (Materials[i])
+		TArray<FMaterialElementData*> ReadDatas;
+		MaterialData->GetAllRows("", ReadDatas);
+
+		if (ReadDatas[(int32)RenderType] && ReadDatas[(int32)RenderType]->DataAsset)
 		{
-			GetMesh()->SetMaterial(i, Materials[i]);
+			UCMaterialData* SelectedDataAsset = ReadDatas[(int32)RenderType]->DataAsset;
+
+			for (int32 i = 0; i < (int32)EMaterialElementType::Max; i++)
+			{
+				//Todo. SelectedDataAsset->Materials[i] check null
+				GetMesh()->SetMaterial(i, SelectedDataAsset->Materials[i]);
+			}
 		}
 	}
 }
@@ -33,5 +42,4 @@ void ACMiku::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
-
 

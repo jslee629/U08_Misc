@@ -22,16 +22,17 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 private:
-	void AddIndicies(int32 StartIndex);
-
+	void AddIndices(int32 StartIndex);
+	
 protected:
 	UPROPERTY(VisibleDefaultsOnly, Category = "Components")
 	UProceduralMeshComponent* ProcMeshComp;
 
 	TArray<FVector> Positions;
-	TArray<int32> Indicies;
+	TArray<int32> Indices;
 	TArray<FVector> Normals;
 	TArray<FVector2D> UVs;
 	TArray<FColor> Colors;
 	TArray<FProcMeshTangent> Tangents;
+
 };

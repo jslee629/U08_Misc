@@ -3,12 +3,12 @@
 using UnrealBuildTool;
 using System.Collections.Generic;
 
-public class miscTarget : TargetRules
+public class MiscTarget : TargetRules
 {
-	public miscTarget( TargetInfo Target) : base(Target)
+	public MiscTarget( TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
-		ExtraModuleNames.AddRange( new string[] { "misc" } );
+		ExtraModuleNames.AddRange( new string[] { "Misc" } );
 	}
 }

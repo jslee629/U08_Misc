@@ -14,15 +14,14 @@ class MISC_API ACSlicableMesh : public AActor
 public:	
 	ACSlicableMesh();
 
-protected:
-	virtual void OnConstruction(const FTransform& Transform) override;
-
-public:
 	FORCEINLINE UMaterial* GetCapMaterial() { return CapMaterial; }
 
 protected:
+	virtual void OnConstruction(const FTransform& Transform) override;
+
+protected:
 	UPROPERTY(VisibleDefaultsOnly, Category = "Components")
-	USceneComponent* DefaultRootComp;
+	USceneComponent* RootComp;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = "Components")
 	UStaticMeshComponent* StaticMeshComp;

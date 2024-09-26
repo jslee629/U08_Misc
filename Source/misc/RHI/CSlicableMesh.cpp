@@ -4,23 +4,23 @@
 
 ACSlicableMesh::ACSlicableMesh()
 {
-	DefaultRootComp = CreateDefaultSubobject<USceneComponent>("DefaultRootComp");
-	RootComponent = DefaultRootComp;
+	RootComp = CreateDefaultSubobject<USceneComponent>("Root");
+	RootComponent = RootComp;
 
 	StaticMeshComp = CreateDefaultSubobject<UStaticMeshComponent>("StaticMeshComp");
-	StaticMeshComp->SetupAttachment(DefaultRootComp);
+	StaticMeshComp->SetupAttachment(RootComp);
 
-	ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMeshAsset(TEXT("/Game/Geometry/Meshes/1M_Cube"));
-	if (StaticMeshAsset.Succeeded())
+	ConstructorHelpers::FObjectFinder<UStaticMesh> StateMeshAsset(TEXT("/Game/Geometry/Meshes/1M_Cube"));
+	if (StateMeshAsset.Succeeded())
 	{
-		StaticMeshComp->SetStaticMesh(StaticMeshAsset.Object);
+		StaticMeshComp->SetStaticMesh(StateMeshAsset.Object);
 	}
 
 	StaticMeshComp->SetVisibility(false);
 	StaticMeshComp->SetCollisionProfileName("NoCollision");
 
 	ProcMeshComp = CreateDefaultSubobject<UProceduralMeshComponent>("ProcMeshComp");
-	ProcMeshComp->SetupAttachment(DefaultRootComp);
+	ProcMeshComp->SetupAttachment(RootComp);
 
 	ProcMeshComp->SetSimulatePhysics(true);
 	ProcMeshComp->bUseComplexAsSimpleCollision = false;
