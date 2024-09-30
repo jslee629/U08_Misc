@@ -12,9 +12,16 @@ class ATP_TopDownCharacter : public ACharacter
 public:
 	ATP_TopDownCharacter();
 
+protected:
+	virtual void BeginPlay() override;
+
+public:
 	virtual void Tick(float DeltaSeconds) override;
 
 	FORCEINLINE class UDecalComponent* GetCursorToWorld() { return CursorToWorld; }
+
+	void OnSprint();
+	void OffSprint();
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
@@ -25,5 +32,18 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UDecalComponent* CursorToWorld;
+
+	UPROPERTY(VisibleAnywhere, Category = "Smear")
+	class UMaterialInterface* OriginMaterial;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Smear")
+	class UMaterialInterface* SmearMaterial;
+
+	UPROPERTY(VisibleAnywhere, Category = "Smear")
+	class UMaterialInstanceDynamic* SmearMaterialDynamic;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Smear")
+	float SmearWeight;
 };
+
 
