@@ -13,7 +13,6 @@ public class Tore : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[]
 		{
 			"Core",
-			
 		});
 			
 		
@@ -24,7 +23,9 @@ public class Tore : ModuleRules
 			"Engine",
 			"Slate",
 			"SlateCore",
-			"UnrealEd"
+			"UnrealEd",
+			"EditorStyle",
+			"Projects"
 		});
 		
 	}
