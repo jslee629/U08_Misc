@@ -54,10 +54,10 @@ ATP_TopDownCharacter::ATP_TopDownCharacter()
 	PostProcessComp = CreateDefaultSubobject<UPostProcessComponent>(TEXT("PostProcessComp"));
 	PostProcessComp->SetupAttachment(RootComponent);
 
-	//if (ensure(SphereMaskMaterial))
-	//{
-	//	PostProcessComp->Settings.AddBlendable(SphereMaskMaterial, 1.f);
-	//}
+	/*if (SphereMaskMaterial)
+	{
+		PostProcessComp->Settings.AddBlendable(SphereMaskMaterial, 1.f);
+	}*/
 }
 
 void ATP_TopDownCharacter::BeginPlay()
@@ -102,7 +102,7 @@ void ATP_TopDownCharacter::OnSprint()
 void ATP_TopDownCharacter::OffSprint()
 {
 	GetMesh()->SetMaterial(0, OriginMaterial);
-	GetCharacterMovement()->MaxWalkSpeed = 600.f;
+	GetCharacterMovement()->MaxWalkSpeed = 600;
 
 	SmearMaterialDynamic->SetVectorParameterValue("Direction", FVector::ZeroVector);
 	SmearMaterialDynamic->SetScalarParameterValue("Length", 0.f);

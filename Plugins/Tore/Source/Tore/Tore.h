@@ -4,7 +4,6 @@
 #include "Modules/ModuleManager.h"
 
 class IAssetTypeActions;
-class FExtender;
 class FToolBarBuilder;
 
 class FToreModule : public IModuleInterface
@@ -15,8 +14,9 @@ public:
 
 private:
 	void AddLoadMeshButton(FToolBarBuilder& ToolBarBuilder);
+	void AddOpenViewerButton(FToolBarBuilder& ToolBarBuilder);
 
 private:
-	TSharedPtr<IAssetTypeActions> AssetToolAction;
 	TSharedPtr<FExtender> Extender;
+	TSharedPtr<IAssetTypeActions> AssetToolAction;
 };

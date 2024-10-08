@@ -13,12 +13,16 @@ public:
 private:
 	static TSharedPtr<CIconStyle> Instance;
 
-private:
+public:
 	CIconStyle();
 	~CIconStyle();
 
+private:
+	void RegisterIcon(FSlateIcon& OutIcon, const FString& Postfix, const FString& ImagePath, const FVector2D& Size = FVector2D(48));
+
 public:
 	FSlateIcon LoadMeshIcon;
+	FSlateIcon OpenViewerIcon;
 
 private:
 	const FName StyleSetName;

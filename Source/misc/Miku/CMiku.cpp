@@ -12,7 +12,7 @@ ACMiku::ACMiku()
 	GetMesh()->SetRelativeLocation(FVector(0, 0, -88));
 	GetMesh()->SetRelativeRotation(FRotator(0, -90, 0));
 
-	LightDirection = FVector(1.f, 1.f, 1.f);
+	LightDirection = FVector(1, 1, 1);
 
 	bRunConstructionScriptOnDrag = false;
 }
@@ -25,7 +25,7 @@ void ACMiku::OnConstruction(const FTransform& Transform)
 	{
 		TArray<FMaterialElementData*> ReadDatas;
 		MaterialData->GetAllRows("", ReadDatas);
-		
+
 		if ((int32)RenderType >= (int32)ReadDatas.Num())
 		{
 			UE_LOG(LogTemp, Error, TEXT("RenderType is out of size"));
@@ -33,7 +33,6 @@ void ACMiku::OnConstruction(const FTransform& Transform)
 		}
 
 		MikuMaterials.Empty();
-
 		if (ReadDatas[(int32)RenderType] && ReadDatas[(int32)RenderType]->DataAsset)
 		{
 			UCMaterialData* SelectedDataAsset = ReadDatas[(int32)RenderType]->DataAsset;
@@ -43,32 +42,36 @@ void ACMiku::OnConstruction(const FTransform& Transform)
 				if (SelectedDataAsset->Materials[i])
 				{
 					MikuMaterials.Add(SelectedDataAsset->Materials[i]);
+
 					GetMesh()->SetMaterial(i, SelectedDataAsset->Materials[i]);
 				}
 			}
 		}
 	}
 
+
 	SetLightDirectionToMaterials(LightDirection);
+
 }
+
 
 #if WITH_EDITOR
 void ACMiku::SetLightDirectionToMaterials(FVector InDirection)
 {
 	for (UMaterialInstanceConstant* Material : MikuMaterials)
 	{
-		//GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::White, GetNameSafe(Material));
+		//GEngine->AddOnScreenDebugMessage(-1, 2, FColor::White, GetNameSafe(Material));
 
 		for (const FVectorParameterValue& VectorParams : Material->VectorParameterValues)
 		{
-			//GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::White, VectorParams.ParameterInfo.Name.ToString());
+			//GEngine->AddOnScreenDebugMessage(-1, 2, FColor::White, VectorParams.ParameterInfo.Name.ToString());
 
 			if (VectorParams.ParameterInfo.Name == "LightDirection")
 			{
-				Material->SetVectorParameterValueEditorOnly(VectorParams.ParameterInfo, FLinearColor(InDirection));
+				Material->SetVectorParameterValueEditorOnly(VectorParams.ParameterInfo, InDirection);
 			}
 		}
-
 	}
 }
 #endif
+

@@ -19,6 +19,7 @@ public:
 protected:
 	virtual void OnConstruction(const FTransform& Transform) override;
 
+
 #if WITH_EDITOR
 protected:
 	void SetLightDirectionToMaterials(FVector InDirection);

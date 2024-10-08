@@ -13,6 +13,7 @@ public class Tore : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[]
 		{
 			"Core",
+			
 		});
 			
 		
@@ -25,7 +26,11 @@ public class Tore : ModuleRules
 			"SlateCore",
 			"UnrealEd",
 			"EditorStyle",
-			"Projects"
+			"Projects",
+			"GameplayDebugger",
+			"DesktopPlatform",
+			"MainFrame",
+			"Misc"
 		});
 		
 	}
