@@ -8,6 +8,7 @@
 #include "AssetTools/CAssetTypeAction.h"
 #include "DebuggerCategory/CDebuggerCategory.h"
 #include "DetailPannel/CDetailPannel.h"
+#include "AssetViewer/CAssetViewer.h"
 #include "RHI/CHasDetailButton.h"
 
 
@@ -69,6 +70,7 @@ void FToreModule::ShutdownModule()
 	UE_LOG(LogTemp, Error, TEXT("Shutdown Tore Module"));
 
 	CIconStyle::Shutdown();
+	CAssetViewer::Shutdown();
 
 	if (IGameplayDebugger::IsAvailable())
 	{
