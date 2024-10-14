@@ -3,6 +3,9 @@
 #include "CoreMinimal.h"
 #include "Toolkits/AssetEditorToolkit.h"
 
+class SCViewport;
+class IDetailsView;
+
 class TORE_API CAssetViewer : public FAssetEditorToolkit
 {
 public:
@@ -17,6 +20,8 @@ private:
 
 	virtual void RegisterTabSpawners(const TSharedRef<FTabManager>& InTabManager) override;
 	TSharedRef<SDockTab> SpawnViewportTab(const FSpawnTabArgs& InArgs);
+	TSharedRef<SDockTab> SpawnPreviewSceneSettingsTab(const FSpawnTabArgs& InArgs);
+	TSharedRef<SDockTab> SpawnDetailsViewTab(const FSpawnTabArgs& InArgs);
 
 public:
 	//Inherited from FAssetEditorToolkit
@@ -24,4 +29,9 @@ public:
 	virtual FText GetBaseToolkitName() const override;			
 	virtual FString GetWorldCentricTabPrefix() const override;	
 	virtual FLinearColor GetWorldCentricTabColorScale() const override;
+
+private:
+	TSharedPtr<SCViewport> Viewport;
+	TSharedPtr<SWidget> PreviewSceneSettings;
+	TSharedPtr<IDetailsView> DetailsView;
 };

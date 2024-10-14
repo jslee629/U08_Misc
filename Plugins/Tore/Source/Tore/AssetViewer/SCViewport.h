@@ -11,12 +11,16 @@ class TORE_API SCViewport : public SEditorViewport, public FGCObject
 public:
 	SCViewport();
 
+	void Construct(const FArguments& InArgs);
+
 public:
 	// Inherited via SEditorViewport
 	virtual TSharedRef<FEditorViewportClient> MakeEditorViewportClient() override;
 
 	//Inherited via FGCObject
 	virtual void AddReferencedObjects(FReferenceCollector& Collector) override;
+
+	TSharedRef<FAdvancedPreviewScene> GetScene();
 
 private:
 	TSharedPtr<FAdvancedPreviewScene> Scene;

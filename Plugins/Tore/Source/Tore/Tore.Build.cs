@@ -12,8 +12,7 @@ public class Tore : ModuleRules
 	
 		PublicDependencyModuleNames.AddRange(new string[]
 		{
-			"Core",
-			
+			"Core"
 		});
 			
 		
@@ -30,6 +29,8 @@ public class Tore : ModuleRules
 			"GameplayDebugger",
 			"DesktopPlatform",
 			"MainFrame",
+			"AdvancedPreviewScene",
+			"InputCore",
 			"Misc"
 		});
 		
